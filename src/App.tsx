@@ -1,10 +1,11 @@
 import React from 'react';
+import AuthLayout from "./layout";
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      init
+      <AuthLayout />
     </div>
   );
 }
