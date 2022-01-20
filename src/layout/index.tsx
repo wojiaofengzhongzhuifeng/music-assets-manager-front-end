@@ -4,13 +4,32 @@ import { Link, Routes, Route } from "react-router-dom";
 import styles from './style.module.css'
 import {MenuInfo} from "rc-menu/lib/interface";
 import routerList from "../config/routers";
+import {MenuList, MenuItemProps} from "../config/menus";
 
 const { Header, Footer, Sider, Content } = Layout;
-const { SubMenu } = Menu;
+const { SubMenu,  } = Menu;
 
 const AuthLayout = ()=>{
   const onClickMenu = (menuInfo: MenuInfo)=>{
     console.log(menuInfo);
+  }
+  const renderMenuList = (menuList: MenuItemProps[])=>{
+   return menuList.map((menuItem)=>{
+     const path = menuItem.path
+     const title = menuItem.title
+     const children = menuItem.children
+     if(children){
+       return (
+         <SubMenu key={path} title={title}>
+           {renderMenuList(children)}
+         </SubMenu>
+       )
+     } else {
+       return <Menu.Item key={path}>
+         <Link to={path}>{title}</Link>
+       </Menu.Item>
+     }
+   })
   }
 
   return (
@@ -27,33 +46,7 @@ const AuthLayout = ()=>{
             mode='inline'
             onClick={onClickMenu}
           >
-            <Menu.Item key="1">
-              Navigation One
-            </Menu.Item>
-            <Menu.Item key="2">
-              Navigation Two
-            </Menu.Item>
-            <SubMenu key="sub1" title="Navigation Two">
-              <Menu.Item key="3">
-                <Link to='/option3'>Option3</Link>
-              </Menu.Item>
-              <Menu.Item key="4">Option 4</Menu.Item>
-              <SubMenu key="sub1-2" title="Submenu">
-                <Menu.Item key="5">Option 5</Menu.Item>
-                <Menu.Item key="6">Option 6</Menu.Item>
-              </SubMenu>
-            </SubMenu>
-            <SubMenu key="sub2" title="Navigation Three">
-              <Menu.Item key="7">Option 7</Menu.Item>
-              <Menu.Item key="8">Option 8</Menu.Item>
-              <Menu.Item key="9">Option 9</Menu.Item>
-              <Menu.Item key="10">Option 10</Menu.Item>
-            </SubMenu>
-            <Menu.Item key="link">
-              <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-                Ant Design
-              </a>
-            </Menu.Item>
+            {renderMenuList(MenuList)}
           </Menu>
         </Sider>
         <Layout>

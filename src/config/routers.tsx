@@ -8,6 +8,7 @@ export interface RouterItem {
   path: string
   element: ReactElement<any, any>
 }
+// @ts-ignore
 const routerList: RouterItem[] = [
   {
     path: '/',
@@ -26,9 +27,11 @@ const routerList: RouterItem[] = [
     element: <SongList />
   },
   {
-    path: '/operations/push',
+    path: '/operations/pushManager',
     element: <PushManager />
   },
+] as const
 
-]
+export type routerPathList = typeof routerList[number]['path']
+
 export default routerList
