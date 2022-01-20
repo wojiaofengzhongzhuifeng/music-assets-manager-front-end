@@ -1,12 +1,15 @@
 import React from 'react';
+import { BrowserRouter } from "react-router-dom";
 import AuthLayout from "./layout";
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <AuthLayout />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <AuthLayout />
+      </div>
+    </BrowserRouter>
   );
 }
 
