@@ -8,9 +8,8 @@ import {
   VipAccount,
   UpdateVipAccountStateReq,
   VipAccountState
-} from '@/pages/VipAccountListManager/type'
-import { AntdColumnObjItem } from '@/shared/utils'
-import UrlWithCopyButton from '@/components/UrlWithCopyButton'
+} from '../type'
+import { AntdColumnObjItem } from '../../../../utils/type'
 
 const { Search } = Input
 
@@ -65,7 +64,6 @@ const TableAndForm: FC = () => {
       title: 'E-MAIL',
       width: 200,
       dataIndex: VipAccountKey.email,
-      render: (email: string) => <UrlWithCopyButton text={email} />
     },
     {
       title: 'Delete',
